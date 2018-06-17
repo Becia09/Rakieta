@@ -70,57 +70,45 @@ public class Kosmolot
         sizeRocket = parserInt(tabString[0]);
         shield_on = parserChar(tabString[1]);
 
-        //---------------------------------------------------------------klasa rownoleglobok
+        //---------------------------------------------------------------klasa rakieta
         System.out.println(sizeRocket + " - rozmiar rakiety\n" + shield_on + " - opancerzenie");
         System.out.println(sizeRocket + " " + shield_on);
 
-        String verse = "";
-        for (int i = 0; i < width; i++)
+        String tabRocket[] = new String[sizeRocket];
+        String line = "";
+        int countStar = 1;
+        int countSpace = sizeRocket-1;
+
+        for (int i = 0; i < sizeRocket; i++)
         {
-            verse += "*";
+            for (int j = 0; j < sizeRocket; j++)
+            {
+                for (int g = 0; g < countStar; g++)
+                {
+                    line += "*";
+                }
+
+                if (j != sizeRocket - 1)
+                {
+                    for (int g = 0; g < countSpace; g++)
+                    {
+                        line += " ";
+                    }
+                }
+            }
+            countStar++;
+            countSpace--;
+            tabRocket[i] = line;
+            line = "";
         }
 
-        if (angle == 0 || height == 1) //prostokat
+        for (int i = 0; i < tabRocket.length; i++)
         {
-            for (int i = 0; i < height - 1; i++)
-            {
-                System.out.println(verse);
-            }
-            System.out.println(verse + "\n"); //ostatnia linijka poza petla bo ze znakiem konca linii
+            System.out.println(tabRocket[i]);
         }
-        else //rownoleglobok
+        for (int i = tabRocket.length - 1; i > 0; i--)
         {
-            String space = "";
-            for (int i = 0; i < abs(angle); i++)
-            {
-                space += " ";
-            }
-
-            if (angle > 0)
-            {
-                for (int i = 0; i < height - 1; i++)
-                {
-                    System.out.println(verse);
-                    verse = space + verse;
-                }
-                System.out.println(verse + "\n"); //ostatnia linijka poza petla bo ze znakiem konca linii
-            }
-            else //angle < 0
-            {
-                String allSpace = space;
-                for (int i = 0; i < height - 2; i++)
-                {
-                    allSpace += space;
-                }
-
-                verse = allSpace + verse;
-                for (int i = 0; i < height; i++)
-                {
-                    System.out.println(verse);
-                    verse = verse.substring(abs(angle));
-                }
-                //System.out.println(verse + "\n"); //ostatnia linijka poza petla bo ze znakiem konca linii
-            }
+            System.out.println(tabRocket[i]);
         }
     }
 }
