@@ -3,6 +3,102 @@ import static java.lang.Math.abs;
 
 public class Kosmolot
 {
+    public static void shiedlOff(int sizeRocket)
+    {
+        String tabRocket[] = new String[sizeRocket];
+        String line = "";
+        int countStar = 1;
+        int countSpace = sizeRocket-1;
+
+        for (int i = 0; i < sizeRocket; i++)
+        {
+            for (int j = 0; j < sizeRocket; j++)
+            {
+                for (int g = 0; g < countStar; g++)
+                {
+                    line += "*";
+                }
+
+                if (j != sizeRocket - 1)
+                {
+                    for (int g = 0; g < countSpace; g++)
+                    {
+                        line += " ";
+                    }
+                }
+            }
+            countStar++;
+            countSpace--;
+            tabRocket[i] = line;
+            line = "";
+        }
+
+        for (int i = 0; i < tabRocket.length; i++)
+        {
+            System.out.println(tabRocket[i]);
+        }
+        for (int i = tabRocket.length - 2; i >= 0; i--)
+        {
+            System.out.println(tabRocket[i]);
+        }
+    }
+
+    public static void shiedlOn(int sizeRocket)
+    {
+        String tabRocket[] = new String[sizeRocket];
+        String line = "";
+        int countStar = 1;
+        int countSpace = sizeRocket-1;
+
+        for (int i = 0; i < sizeRocket; i++)
+        {
+            for (int j = 0; j < sizeRocket; j++)
+            {
+                for (int g = 0; g < countStar; g++)
+                {
+                    if (j == 0 && g == 0)
+                    {
+                        line += ">";
+                    }
+                    else if(g == countStar - 1 && i != sizeRocket - 1)
+                    {
+                        line += "\\";
+                    }
+                    else if (i == sizeRocket - 1 && g == countStar - 1 && j == sizeRocket - 1)
+                    {
+                        line += ">";
+                    }
+                    else
+                    {
+                        line += "*";
+                    }
+                }
+
+                if (j != sizeRocket - 1)
+                {
+                    for (int g = 0; g < countSpace; g++)
+                    {
+                        line += " ";
+                    }
+                }
+            }
+            countStar++;
+            countSpace--;
+            tabRocket[i] = line;
+            line = "";
+        }
+
+        for (int i = 0; i < tabRocket.length; i++)
+        {
+            System.out.println(tabRocket[i]);
+        }
+        for (int i = tabRocket.length - 2; i >= 0; i--)
+        {
+            tabRocket[i] = tabRocket[i].replaceAll("\\\\","/");
+            System.out.println(tabRocket[i]);
+        }
+    }
+
     public static int parserInt(String number)
     {
         int result = 0;
@@ -74,41 +170,13 @@ public class Kosmolot
         System.out.println(sizeRocket + " - rozmiar rakiety\n" + shield_on + " - opancerzenie");
         System.out.println(sizeRocket + " " + shield_on);
 
-        String tabRocket[] = new String[sizeRocket];
-        String line = "";
-        int countStar = 1;
-        int countSpace = sizeRocket-1;
-
-        for (int i = 0; i < sizeRocket; i++)
+        if (shield_on == 'N')
         {
-            for (int j = 0; j < sizeRocket; j++)
-            {
-                for (int g = 0; g < countStar; g++)
-                {
-                    line += "*";
-                }
-
-                if (j != sizeRocket - 1)
-                {
-                    for (int g = 0; g < countSpace; g++)
-                    {
-                        line += " ";
-                    }
-                }
-            }
-            countStar++;
-            countSpace--;
-            tabRocket[i] = line;
-            line = "";
+            shiedlOff (sizeRocket);
         }
-
-        for (int i = 0; i < tabRocket.length; i++)
+        else
         {
-            System.out.println(tabRocket[i]);
-        }
-        for (int i = tabRocket.length - 1; i > 0; i--)
-        {
-            System.out.println(tabRocket[i]);
+            shiedlOn(sizeRocket);
         }
     }
 }
